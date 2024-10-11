@@ -5,7 +5,7 @@ import numpy as np
 # تحميل النموذج المحفوظ
 model = pickle.load(open('best_house_price_model.pkl', 'rb'))
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/')
 def home():
@@ -30,5 +30,5 @@ def predict():
 
     return render_template('index.html', prediction_text=f'Predicted House Price: {output} rupees')
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True)
