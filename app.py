@@ -32,3 +32,5 @@ def predict():
 
 if _name_ == "_main_":
     app.run(debug=True)
+if _name_ == "_main_":
+    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
