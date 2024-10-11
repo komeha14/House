@@ -1,139 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>House Price Prediction</title>
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f4;
-                margin: 0;
-                padding: 0;
-                text-align: center;
-            }
-
-            header {
-                background-color: #007bff;
-                color: white;
-                padding: 10px 0;
-            }
-
-            h1 {
-                margin: 0;
-            }
-
-            .container {
-                margin-top: 30px;
-            }
-
-            .form-input {
-                margin-bottom: 15px;
-            }
-
-            input[type="text"],
-            select {
-                width: 300px;
-                padding: 10px;
-                border-radius: 5px;
-                border: 1px solid #ccc;
-            }
-
-            input[type="submit"] {
-                background-color: #28a745;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-            }
-
-            input[type="submit"]:hover {
-                background-color: #218838;
-            }
-
-            footer {
-                margin-top: 20px;
-                padding: 10px;
-                background-color: #007bff;
-                color: white;
-                position: absolute;
-                bottom: 0;
-                width: 100%;
-            }
-
-            .logo {
-                width: 100px;
-                margin: 20px 0;
-            }
-
-            .prediction {
-                font-size: 20px;
-                font-weight: bold;
-                margin-top: 20px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <header>
-            <h1>House Price Prediction</h1>
-            <img src="https://via.placeholder.com/100" alt="Logo" class="logo">
-        </header>
-
-        <div class="container">
-            <h2>Enter the details below to predict house price</h2>
-            <form action="/predict" method="POST">
-                <div class="form-input">
-                    <label for="carpet_area">Carpet Area (sqft):</label><br>
-                    <input type="text" name="carpet_area" placeholder="Enter Carpet Area" required><br>
-                </div>
-                <div class="form-input">
-                    <label for="bathroom">Bathrooms:</label><br>
-                    <input type="text" name="bathroom" placeholder="Enter Number of Bathrooms" required><br>
-                </div>
-                <div class="form-input">
-                    <label for="balcony">Balconies:</label><br>
-                    <input type="text" name="balcony" placeholder="Enter Number of Balconies" required><br>
-                </div>
-                <div class="form-input">
-                    <label for="furnishing">Furnishing:</label><br>
-                    <select name="furnishing" required>
-                        <option value="0">Unfurnished</option>
-                        <option value="1">Semi-Furnished</option>
-                        <option value="2">Fully-Furnished</option>
-                    </select><br>
-                </div>
-                <div class="form-input">
-                    <label for="floor">Floor:</label><br>
-                    <select name="floor" required>
-                        <option value="0">Ground Floor</option>
-                        <option value="1">1st Floor</option>
-                        <option value="2">2nd Floor</option>
-                        <option value="3">3rd Floor and Above</option>
-                    </select><br>
-                </div>
-                <div class="form-input">
-                    <label for="facing">Facing:</label><br>
-                    <select name="facing" required>
-                        <option value="0">East</option>
-                        <option value="1">West</option>
-                        <option value="2">North</option>
-                        <option value="3">South</option>
-                    </select><br>
-                </div>
-                <input type="submit" value="Predict">
-            </form>
-
-            <div class="prediction">
-                {{ prediction_text }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 0;
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            margin-top: 30px;
+        }
+        .form-input {
+            margin-bottom: 15px;
+        }
+        input[type="text"], select {
+            width: 300px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        footer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .logo {
+            width: 100px;
+            margin: 20px 0;
+        }
+        .prediction {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>House Price Prediction</h1>
+        <img src="https://via.placeholder.com/100" alt="Logo" class="logo">
+    </header>
+    
+    <div class="container">
+        <h2>Enter the details below to predict house price</h2>
+        <form action="/predict" method="POST">
+            <div class="form-input">
+                <label for="carpet_area">Carpet Area (sqft):</label><br>
+                <input type="text" name="carpet_area" placeholder="Enter Carpet Area" required><br>
             </div>
+            <div class="form-input">
+                <label for="bathroom">Bathrooms:</label><br>
+                <input type="text" name="bathroom" placeholder="Enter Number of Bathrooms" required><br>
+            </div>
+            <div class="form-input">
+                <label for="balcony">Balconies:</label><br>
+                <input type="text" name="balcony" placeholder="Enter Number of Balconies" required><br>
+            </div>
+            <div class="form-input">
+                <label for="furnishing">Furnishing:</label><br>
+                <select name="furnishing" required>
+                    <option value="0">Unfurnished</option>
+                    <option value="1">Semi-Furnished</option>
+                    <option value="2">Fully-Furnished</option>
+                </select><br>
+            </div>
+            <div class="form-input">
+                <label for="floor">Floor:</label><br>
+                <select name="floor" required>
+                    <option value="0">Ground Floor</option>
+                    <option value="1">1st Floor</option>
+                    <option value="2">2nd Floor</option>
+                    <option value="3">3rd Floor and Above</option>
+                </select><br>
+            </div>
+            <div class="form-input">
+                <label for="facing">Facing:</label><br>
+                <select name="facing" required>
+                    <option value="0">East</option>
+                    <option value="1">West</option>
+                    <option value="2">North</option>
+                    <option value="3">South</option>
+                </select><br>
+            </div>
+            <input type="submit" value="Predict">
+        </form>
+        
+        <div class="prediction">
+            {{ prediction_text }}
         </div>
+    </div>
 
-        <footer>
-            <p>Powered by AI House Price Predictor</p>
-        </footer>
-    </body>
-
+    <footer>
+        <p>Powered by AI House Price Predictor</p>
+    </footer>
+</body>
 </html>
